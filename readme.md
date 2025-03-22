@@ -1,25 +1,60 @@
-# SSH Profile Manager
+# GitHub SSH Profile Manager
 
 A desktop application for easily managing multiple SSH profiles and GitHub configurations.
 
 ## Features
 
-- Create and manage multiple SSH profiles
-- Switch between different SSH configurations with one click
-- View and copy SSH public keys
-- Optional GitHub token integration
-- Dark/Light theme support
-- User-friendly interface
+- Create and manage multiple GitHub SSH profiles for different accounts
+- Seamlessly switch between GitHub SSH configurations with a single click
+- Easily view and copy SSH public keys for GitHub authentication
+- Optional GitHub token integration for enhanced functionality
+- Dark/Light theme support to match your system preferences
+- Clean, intuitive interface for managing your GitHub profiles
 
 ## Screenshots
 
 ![Screenshot](./screenshot.png)
 
-## Installation
+## Prerequisites
 
-1. Download the latest release from the releases page
-2. Install the application for your operating system
-3. Launch SSH Profile Manager
+- Node.js (v16 or higher)
+- npm (v7 or higher)
+- Git
+
+## Build Instructions
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/zemichaelmd/github-ssh-profile-manager.git
+   cd github-ssh-profile-manager
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Build the application:
+   ```bash
+   npm run build
+   ```
+
+4. Create distributable:
+   ```bash
+   npm run dist
+   ```
+
+The built application will be available in the `release` directory.
+
+## Development
+
+To run the application in development mode:
+
+```bash
+npm run dev
+```
+
+This will start the application with hot-reload enabled for development.
 
 ## Usage
 
@@ -37,22 +72,22 @@ A desktop application for easily managing multiple SSH profiles and GitHub confi
 
 ## Important
 
-- This application is designed to work on macOS and Linux.
-- The application you to copy the ssh-rsa key and add it to your GitHub account.
+- This application is designed to work on macOS, and Linux.
+- The application requires you to copy the ssh-rsa key and add it to your GitHub account.
 
-## Development
+## Tech Stack
 
-Built with:
 - Electron
 - TypeScript
 - TailwindCSS
+- Node.js
 
 ## Author
 
-**Zemichael**
+**Zemichael Mehretu**
 - LinkedIn: [linkedin.com/in/zemichaelmd](https://linkedin.com/in/zemichaelmd)
 - GitHub: [github.com/zemichaelmd](https://github.com/zemichaelmd)
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
+This project is licensed under the ISC License - see the LICENSE file for details.
