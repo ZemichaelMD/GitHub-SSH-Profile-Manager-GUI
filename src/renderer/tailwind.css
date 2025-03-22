@@ -868,3 +868,22 @@ video {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
+
+:root {
+  --glass-bg: rgba(255, 255, 255, 0.7);
+  --glass-bg-dark: rgba(25, 25, 25, 0.7);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-border-dark: rgba(0, 0, 0, 0.1);
+}
+
+.glass-morphism {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  border-radius: 14px;
+}
+
+.dark .glass-morphism {
+  background: var(--glass-bg-dark);
+  border-color: var(--glass-border-dark);
+}

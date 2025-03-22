@@ -1,6 +1,7 @@
 {
   "name": "github-ssh-profile-manager",
-  "version": "1.0.0",
+  "productName": "GitHub SSH Profile Manager",
+  "version": "0.0.2",
   "main": "./dist/main/main.js",
   "files": [
     "dist/**/*",
@@ -8,18 +9,21 @@
   ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "electron .",
+    "start": "cross-env NODE_ENV=development electron .",
     "build": "tsc && npm run copy:index && npm run copy:tray && npm run build:css",
-    "dev": "npm run build && npm run start",
+    "dev": "concurrently \"npm run copy:index\" \"npm run copy:tray\" \"npm run watch\" \"npm run watch:css\" \"npm run watch:html\" \"npm run start\"",
+    "watch": "tsc -w",
+    "watch:css": "tailwindcss -i ./src/renderer/styles.css -o ./dist/renderer/styles.css --watch",
+    "watch:html": "nodemon --watch src/renderer/index.html --exec 'npm run copy:index'",
     "build:css": "tailwindcss -i ./src/renderer/styles.css -o ./dist/renderer/styles.css",
     "copy:index": "cp ./src/renderer/index.html ./dist/renderer/index.html",
-    "copy:tray": "cp ./src/renderer/tray_icon.png ./dist/renderer/tray_icon.png",
+    "copy:tray": "concurrently \"cp ./src/renderer/tray_icon_dark.png ./build-assets/tray_icon_dark.png\" \"cp ./src/renderer/tray_icon_light.png ./build-assets/tray_icon_light.png\"",
     "dist": "electron-builder"
   },
   "keywords": [],
-  "author": "",
+  "author": "Zemichael Mehretu <zemichael.dev>",
   "license": "ISC",
-  "description": "",
+  "description": "A simple tool to manage your GitHub SSH profiles.",
   "dependencies": {
     "autoprefixer": "^10.4.20",
     "lucide-static": "^0.471.0",
@@ -27,12 +31,19 @@
     "tailwindcss": "^3.4.17"
   },
   "devDependencies": {
+    "@tailwindcss/forms": "^0.5.10",
     "@types/node": "^22.10.6",
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3",
     "electron": "^34.0.0",
-    "electron-builder": "^24.13.3"
+    "electron-builder": "^24.13.3",
+    "electron-reloader": "^1.2.3",
+    "nodemon": "^3.1.9",
+    "wait-on": "^8.0.3"
   },
   "build": {
-    "appId": "com.github-ssh-profile-manager",
+    "appId": "com.halepo.github-ssh-profile-manager",
+    "productName": "GitHub SSH Profile Manager",
     "files": [
       "dist/**/*",
       "package.json"
@@ -41,7 +52,8 @@
       "output": "release"
     },
     "mac": {
-      "category": "public.app-category.developer-tools"
+      "category": "public.app-category.developer-tools",
+      "icon": "./build-assets/app_icon.png"
     },
     "win": {
       "target": "nsis"

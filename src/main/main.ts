@@ -1,6 +1,20 @@
-import { app, BrowserWindow, Tray, Menu, ipcMain, nativeImage } from 'electron';
+import { app, BrowserWindow, Tray, Menu, ipcMain, nativeImage, nativeTheme } from 'electron';
 import * as path from 'path';
 import { createProfile, switchProfile, listProfiles, getCurrentProfile, clearProfiles, removeProfile, showSshRsa } from './sshManager';
+
+// Hot reload for development
+if (process.env.NODE_ENV === 'development') {
+  try {
+    require('electron-reloader')(module, {
+      debug: true,
+      watchRenderer: true,
+      ignore: [
+        'node_modules/**/*',
+        'dist/**/*'
+      ]
+    });
+  } catch (_) { console.log('Error'); }
+}
 
 declare global {
   namespace Electron {
@@ -89,7 +103,7 @@ ipcMain.handle('ssh:show-ssh-rsa', async (_, profile: string) => {
 const createWindow = () => {
   mainWindow = new BrowserWindow({
     width: 400,
-    height: 300,
+    height: 450,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       contextIsolation: true,
@@ -97,6 +111,10 @@ const createWindow = () => {
     },
     show: false,
     skipTaskbar: true,
+    resizable: true,
+    minWidth: 400,
+    maxWidth: 400,
+    backgroundColor: '#00000000',
   });
 
   mainWindow.once('ready-to-show', () => {
@@ -118,9 +136,21 @@ app.on('ready', () => {
   if (process.platform === 'darwin') {
     app.dock.hide();
   }
+
+  const darkIcon = nativeImage.createFromPath(path.join(__dirname, '../renderer/tray_icon_dark.png')).resize({ width: 16, height: 16 });
+  const lightIcon = nativeImage.createFromPath(path.join(__dirname, '../renderer/tray_icon_light.png')).resize({ width: 16, height: 16 });
+
+  tray = new Tray(lightIcon);
   
-  const image = nativeImage.createFromPath(path.join(__dirname, '../renderer/tray_icon.png')).resize({ width: 16, height: 16 });
-  tray = new Tray(image);
+  // Set initial icon based on current theme
+  nativeTheme.shouldUseDarkColors ? tray.setImage(darkIcon) : tray.setImage(lightIcon);
+  
+  nativeTheme.on('updated', () => {
+    nativeTheme.shouldUseDarkColors ? tray.setImage(darkIcon) : tray.setImage(lightIcon);
+  });
+  
+  // let image = nativeImage.createFromPath(path.join(__dirname, '../renderer/tray_icon.png')).resize({ width: 16, height: 16 });
+  // tray = new Tray(image);
 
   // Update the tray menu with current profile info
   const updateTrayMenu = async () => {
