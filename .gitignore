@@ -1,4 +1,127 @@
-# gitignore for electron project
+# Comprehensive .gitignore for Electron project
 
-node_modules
-dist
+# Node modules
+node_modules/
+
+# Production build output
+dist/
+build/
+out/
+# release/
+
+# OS generated files
+.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# IDE / Editor settings
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+yarn.lock.*
+
+# Dependency directories
+jspm_packages/
+bower_components/
+
+# Environment files
+.env*
+.env.*.local
+
+# Compiled output (TypeScript/JS)
+*.tsbuildinfo
+
+# Coverage directory used by tools like istanbul
+coverage/
+.nyc_output/
+
+# Mac system files
+.AppleDouble/
+.LSOverride
+
+# VS Code extension profiling
+.vscode-test/
+
+# Test output
+test-results/
+test-results.xml
+
+# Crash and error reports
+electron-crash-report*
+*.tgz
+
+# Misc
+*.log
+*.tmp
+*.temp
+tmp/
+temp/
+
+# Python virtualenv
+.venv/
+venv/
+
+# Yarn Plug'n'Play
+.pnp/
+.pnp.js
+
+# npm cache
+.npm
+
+# Parcel cache
+.cache/
+
+# SASS cache
+.sass-cache/
+
+# Binary artifacts
+*.exe
+*.dll
+*.so
+*.dylib
+*.ncb
+*.sdf
+*.opensdf
+*.vcxproj*
+*.psd
+*.db
+
+# Local jetbrains artifacts
+.idea/
+
+# Custom folders
+.ai_notes/
+
+# User workspace settings (just in case)
+*.code-workspace
+
+# Electron builder output
+dist_electron/
+win-unpacked/
+linux-unpacked/
+mac-unpacked/
+*.app
+
+# App signing/packaging leftovers
+*.dmg
+*.pac
+*.asar
+
+# Snapcraft (linux package system)
+.snapcraft/
+
+# ESLint cache
+.eslintcache
+
+# Prettier cache
+.prettiercache

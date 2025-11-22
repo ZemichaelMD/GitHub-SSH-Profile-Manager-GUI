@@ -1,0 +1,11 @@
+version: 0.0.2
+files:
+  - url: GitHub-SSH-Profile-Manager-0.0.2-arm64-mac.zip
+    sha512: NyL69JmPLF74/wjAM/FxBm8zbvr+bEWmuS6oL7VuCGHUSToyA7fDFtBI1EYjD+W/YqOLQ/RsAXjq4S4Y/6Dtvg==
+    size: 102305701
+  - url: GitHub-SSH-Profile-Manager-0.0.2-arm64.dmg
+    sha512: aIsPbRDX8F9mypQYHaayIkOM9xbTq1rPMKQXXB4c5IekLdSpzBcDYWzggJznPPaygBSeWHf79TMArPJal9nYGw==
+    size: 106096827
+path: GitHub-SSH-Profile-Manager-0.0.2-arm64-mac.zip
+sha512: NyL69JmPLF74/wjAM/FxBm8zbvr+bEWmuS6oL7VuCGHUSToyA7fDFtBI1EYjD+W/YqOLQ/RsAXjq4S4Y/6Dtvg==
+releaseDate: '2025-03-22T21:30:02.686Z'

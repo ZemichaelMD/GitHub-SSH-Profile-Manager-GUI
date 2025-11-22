@@ -1,0 +1,8 @@
+Bugs
+- New profile names should not have invalid characters like spaces
+- Need to switch to other profiles to activate new ones
+- Cancel new profile is visible after new profile is added 
+- Switching from tray doesn't switch in the app
+
+Features
+- Edit the key to paste form previously added ssh-keys in github

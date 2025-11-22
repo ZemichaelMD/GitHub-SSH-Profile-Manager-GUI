@@ -1,155 +1,24 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" class="h-full">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GitHub SSH Profile Manager</title>
-  <link href="./styles.css" rel="stylesheet">
-</head>
-
-<body class="h-full overflow-hidden font-sf-pro bg-gradient-to-b from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-900 text-gray-800 dark:text-gray-200">
-  <div class="h-full flex flex-col">
-    <!-- Top bar with theme toggle and create button -->
-    <div class="flex items-center justify-between p-3 border-b border-gray-200 dark:border-gray-800 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm">
-      <div class="flex items-center gap-2">
-        <button id="themeToggle"
-          class="flex items-center gap-2 px-3 py-1.5 text-sm bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-          <svg class="w-4 h-4 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-          </svg>
-          <svg class="w-4 h-4 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
-          </svg>
-          <span class="text-xs font-medium">
-            <span class="dark:hidden">Light</span>
-            <span class="hidden dark:block">Dark</span>
-            <!-- theme -->
-          </span>
-        </button>
-        <button id="helpButton"
-          class="flex items-center gap-2 px-3 py-1.5 text-sm bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          <span class="text-xs font-medium">Help</span>
-        </button>
-      </div>
-      <button
-        id="createProfile"
-        class="flex items-center gap-2 px-3 py-1.5 text-sm bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M12 2L12 22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-          <path d="M2 12L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
-        </svg>
-        <span class="text-xs font-medium">New Profile</span>
-      </button>
-    </div>
-
-    <!-- Scrollable content area -->
-    <div class="flex-1 overflow-y-auto p-4">
-      <!-- Current Profile Display -->
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 mb-6 border border-gray-200 dark:border-gray-700">
-        <div class="flex items-center justify-between mb-2">
-          <span class="text-xs font-medium text-gray-500 dark:text-gray-400">Current Profile</span>
-          <div class="flex items-center gap-2">
-            <div class="w-2 h-2 rounded-full bg-green-500"></div>
-            <span class="text-xs font-medium text-gray-500 dark:text-gray-400">Active</span>
-          </div>
+    <head>
+        <meta charset="UTF-8" />
+        <!-- Adjust CSP as necessary for your app -->
+        <meta
+            http-equiv="Content-Security-Policy"
+            content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:;"
+        />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>SSH Profile Manager</title>
+        <!-- Vite will inject CSS link here during build -->
+        <!-- <link href="./styles.css" rel="stylesheet"> <-- REMOVE THIS LINE -->
+    </head>
+    <body class="h-full overflow-hidden">
+        <noscript>You need to enable JavaScript to run this app.</noscript>
+        <div id="root" class="h-full">
+            <!-- React App Will Render Here -->
         </div>
-        <div id="currentProfile" class="text-lg font-medium text-gray-900 dark:text-white">None</div>
-      </div>
-
-      <!-- Profile Creation Form -->
-      <div id="create-profile-form-container" class="hidden bg-white dark:bg-gray-800 rounded-lg shadow-sm p-4 mb-6 border border-gray-200 dark:border-gray-700">
-        <h2 class="text-xs font-medium mb-4">Create New Profile</h2>
-        <form id="profileForm" class="space-y-4">
-          <div>
-            <label class="block text-xs font-medium mb-1.5">Profile Name</label>
-            <input type="text" name="profile" required
-              class="w-full px-3 py-2 text-sm bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400">
-          </div>
-          <div>
-            <label class="block text-xs font-medium mb-1.5">Full Name</label>
-            <input type="text" name="name" required
-              class="w-full px-3 py-2 text-sm bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400">
-          </div>
-          <div>
-            <label class="block text-xs font-medium mb-1.5">GitHub Username</label>
-            <input type="text" name="username" required
-              class="w-full px-3 py-2 text-sm bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400">
-          </div>
-          <div>
-            <label class="block text-xs font-medium mb-1.5">Email</label>
-            <input type="email" name="email" required
-              class="w-full px-3 py-2 text-sm bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400">
-          </div>
-          <div>
-            <label class="block text-xs font-medium mb-1.5">GitHub Token (Optional)</label>
-            <input type="password" name="token"
-              class="w-full px-3 py-2 text-sm bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-700 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400">
-          </div>
-          <div class="flex gap-2">
-            <button type="submit"
-              class="px-3 py-1.5 text-xs bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-              Create
-            </button>
-            <button type="button" id="cancelCreate"
-              class="px-3 py-1.5 text-xs bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-md hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
-              Cancel
-            </button>
-          </div>
-        </form>
-      </div>
-
-      <!-- Profile List -->
-      <div class="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700">
-        <div class="flex items-center justify-between p-4 border-b border-gray-200 dark:border-gray-700">
-          <div class="flex items-center gap-2">
-            <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-            </svg>
-            <h2 class="text-xs font-medium text-gray-700 dark:text-gray-300">Manage Profiles</h2>
-          </div>
-          <!-- <button id="clearProfiles" class="flex items-center gap-1 text-xs text-red-500 hover:text-red-600 dark:text-red-400 dark:hover:text-red-300 transition-colors">
-            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-            </svg>
-            Clear All
-          </button> -->
-        </div>
-        <div id="profileList" class="divide-y divide-gray-200 dark:divide-gray-700">
-          <!-- Profile items will be dynamically added here -->
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script src="renderer.js"></script>
-  <script>
-    // Theme toggle functionality
-    document.addEventListener('DOMContentLoaded', () => {
-      // Check for saved theme preference or system preference
-      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark');
-      } else {
-        document.documentElement.classList.remove('dark');
-      }
-
-      // Theme toggle button
-      document.getElementById('themeToggle').addEventListener('click', () => {
-        if (document.documentElement.classList.contains('dark')) {
-          document.documentElement.classList.remove('dark');
-          localStorage.theme = 'light';
-        } else {
-          document.documentElement.classList.add('dark');
-          localStorage.theme = 'dark';
-        }
-      });
-    });
-  </script>
-</body>
-
+        <!-- Vite requires loading the entry script as a module -->
+        <!-- Use a path relative to the project root -->
+        <script type="module" src="/src/renderer/index.tsx"></script>
+    </body>
 </html>

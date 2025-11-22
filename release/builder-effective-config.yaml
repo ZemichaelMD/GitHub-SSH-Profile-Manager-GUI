@@ -1,0 +1,17 @@
+directories:
+  output: release
+  buildResources: build
+appId: com.halepo.github-ssh-profile-manager
+productName: GitHub SSH Profile Manager
+files:
+  - filter:
+      - dist/**/*
+      - package.json
+mac:
+  category: public.app-category.developer-tools
+  icon: ./build-assets/app_icon.png
+win:
+  target: nsis
+linux:
+  target: AppImage
+electronVersion: 34.0.0

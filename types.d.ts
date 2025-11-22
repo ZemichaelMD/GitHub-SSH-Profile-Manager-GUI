@@ -13,5 +13,8 @@ interface Window {
     removeProfile: (profile: string) => Promise<boolean>;
     clearProfiles: () => Promise<boolean>;
     showSshRsa: (profile: string) => Promise<string>;
+    onProfilesUpdated: (callback: () => void) => () => void;
+    refreshTrayMenu: () => void;
+    onSwitchProfile: (callback: (profile: string) => void) => () => void;
   };
 }
