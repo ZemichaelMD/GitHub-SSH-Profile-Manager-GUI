@@ -7,7 +7,7 @@ node_modules/
 dist/
 build/
 out/
-# release/
+release/
 
 # OS generated files
 .DS_Store
